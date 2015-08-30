@@ -1,0 +1,32 @@
+.tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 500px;
+  z-index: 900;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  font-family: OpenSans, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+.tooltip.fade {
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+.tooltip.fade.in {
+  opacity: 1;
+  transition-duration: 100ms;
+}
+.tooltip__content {
+  overflow: hidden;
+  padding: 15px 15px 10px 15px;
+  box-sizing: border-box;
+  max-width: calc(100% - 26px);
+}
