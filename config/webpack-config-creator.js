@@ -46,8 +46,9 @@ module.exports = {
         output: {
             libraryTarget: 'umd',
             library: 'Tooltip',
-            filename: 'tooltip.js',
-            entry: './src/tooltip',
-        }
+          //  umdNamedDefine: true,
+            filename: 'tooltip.js'
+        },
+        entry: './src/tooltip'
     })
 };
