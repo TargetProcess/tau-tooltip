@@ -5,7 +5,7 @@ var coverage = [{
     exclude: /test|node_modules/,
     loader: 'istanbul-instrumenter'
 }];
-var generateConf = function (postLoader) {
+var generateConf = function (config) {
     return {
         resolve: {
             root: [
@@ -16,7 +16,9 @@ var generateConf = function (postLoader) {
             ],
             extensions: ['', '.js', '.json']
         },
-        devtool: 'inline-source-map',
+        entry: config.entry || './',
+        output: config.output,
+        devtool: config.devtool || '',
         module: {
             loaders: [
                 {test: /\.css$/, loader: 'css-loader'},
@@ -26,7 +28,7 @@ var generateConf = function (postLoader) {
                     loader: 'babel-loader'
                 }
             ],
-            postLoaders: postLoader
+            postLoaders: config.postLoader || []
         },
         debug: false,
         stats: {
@@ -38,6 +40,14 @@ var generateConf = function (postLoader) {
 };
 
 module.exports = {
-    coverage: generateConf(coverage),
-    default: generateConf([])
+    coverage: generateConf({postLoader: coverage, devtool: 'inline-source-map'}),
+    default: generateConf({}),
+    prod: generateConf({
+        output: {
+            libraryTarget: 'umd',
+            library: 'Tooltip',
+            filename: 'tooltip.js',
+            entry: './src/tooltip',
+        }
+    })
 };

@@ -1,6 +1,6 @@
 import {assert, expect} from 'chai';
 import {default as $} from 'jquery';
-import {Tooltip} from './../tooltip';
+import {Tooltip} from './../src/tooltip';
 
 describe('balloon api', function () {
     var classTooltip = 'tooltip';
