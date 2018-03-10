@@ -97,7 +97,9 @@ function parsePx(value) {
  *
  * @type {String}
  */
-var style = win.getComputedStyle;
+var style = function(element, property) {
+   return win.getComputedStyle(element)[property];
+};
 
 /**
  * Returns transition duration of element in ms.

@@ -2,7 +2,7 @@ module.exports = function (mode) {
     var webpackConfig = require('./webpack-config-creator');
     var karmaConfigMap = {
         dev: {
-            reporters: ['progress', 'coverage'],
+            reporters: ['mocha', 'coverage'],
             browsers: ['Chrome'],
             coverageReporter: {
                 type: 'html',
@@ -10,8 +10,8 @@ module.exports = function (mode) {
             }
         },
         ci: {
-            reporters: ['coverage', 'dots', 'coveralls'],
-            browsers: ['PhantomJS', 'Firefox'],
+            reporters: ['coverage', 'mocha', 'coveralls'],
+            browsers: ['Firefox'],
             coverageReporter: {
                 type: 'lcovonly',
                 dir: 'coverage/'

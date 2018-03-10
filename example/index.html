@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../tooltip.css">
+    <style>
+        #target {
+            border: 1px solid #eee;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="target">tooltip target</div>
+<button id="show">show tooltip</button>
+<button id="hide">hide tooltip</button>
+<script src="../tooltip.js"></script>
+<script>
+    const tooltip = new Tooltip.Tooltip('test', {place: 'right', effectClass: 'fade'});
+    tooltip.attach(document.querySelector('#target'));
+    document.querySelector('#show').addEventListener('click', () => {
+       tooltip.show();
+    });
+    document.querySelector('#hide').addEventListener('click', () => {
+        tooltip.hide();
+    });
+</script>
+</body>
+</html>

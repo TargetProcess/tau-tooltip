@@ -1,6 +1,42 @@
 import {assert, expect} from 'chai';
-import {default as $} from 'jquery';
 import {Tooltip} from './../src/tooltip';
+
+const $ = function (selector) {
+    let elements = [];
+    if(typeof selector !== 'string') {
+        elements = [selector];
+    } else if (selector.startsWith('.')) {
+        elements = elements.concat(document.querySelectorAll(selector)[0]);
+    } else {
+        const div = document.createElement('div');
+        div.innerHTML = selector;
+        elements = elements.concat(div.firstChild);
+    }
+
+    return {
+        hasClass(className) {
+            return Boolean(elements[0] && elements[0].classList.contains(className));
+        },
+        '0': elements[0],
+        appendTo(selector) {
+            document.querySelector(selector).appendChild(elements[0]);
+            return this;
+        },
+        remove() {
+            elements[0].parentNode.removeChild(elements[0]);
+            return this;
+        },
+        css(styles) {
+           Object.keys(styles).forEach((key) => {
+               elements[0].style[key] = styles[key];
+           });
+           return this;
+        },
+        text() {
+            return elements[0].textContent;
+        }
+    }
+};
 
 describe('balloon api', function () {
     var classTooltip = 'tooltip';
@@ -22,7 +58,7 @@ describe('balloon api', function () {
     });
     it('getElement', function () {
         balloon.show();
-        expect($(selector).get(0)).to.be.equal(balloon.getElement());
+        expect($(selector)[0]).to.be.equal(balloon.getElement());
     });
 
     it('toggle', function (done) {
@@ -33,7 +69,7 @@ describe('balloon api', function () {
             balloon.toggle();
             expect($(selector).hasClass('in')).to.be.true;
             done();
-        }, 20);
+        }, 300);
     });
     it('baseClass and type', function () {
         var balloon = new Tooltip('hello world!!!', {baseClass: 'myClass', typeClass: 'typeClass'});
@@ -55,10 +91,10 @@ describe('balloon api', function () {
     it('content', function () {
         balloon.show();
         balloon.content('<div class="myClass">test content</div>');
-        assert.equal($(selector).find('.myClass').text(), 'test content', 'content string');
+        assert.equal($(selector + ' .myClass').text(), 'test content', 'content string');
         var div = $('<div class="myClass1">test content</div>')[0];
         balloon.content(div);
-        assert.equal($(selector).find('.myClass1').text(), 'test content', 'content dom element');
+        assert.equal($(selector + ' .myClass1').text(), 'test content', 'content dom element');
     });
     it('reposition and attach and destroy and detach', function (done) {
         Tooltip.reposition();

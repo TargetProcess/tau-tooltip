@@ -6,7 +6,7 @@
   "scripts": {
     "test": "karma start config/karma.conf.ci.js",
     "localTest": "karma start config/karma.dev.conf.js",
-    "build":"webpack --config=config/webpack.conf.prod.js"
+    "build": "webpack --config=config/webpack.conf.prod.js"
   },
   "repository": {
     "type": "git",
@@ -37,7 +37,7 @@
     "karma-coveralls": "^1.1.2",
     "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.2.0",
-    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-mocha-reporter": "2.2.5",
     "karma-sourcemap-loader": "^0.3.5",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.2.5",

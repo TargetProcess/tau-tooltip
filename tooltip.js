@@ -52,7 +52,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -159,7 +159,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @type {String}
 	 */
-	var style = win.getComputedStyle;
+	var style = function style(element, property) {
+	    return win.getComputedStyle(element)[property];
+	};
 
 	/**
 	 * Returns transition duration of element in ms.
@@ -706,7 +708,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.Tooltip = Tooltip;
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;
